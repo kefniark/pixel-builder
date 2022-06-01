@@ -17,7 +17,7 @@ Focus on your game, we take care of the tech stack!
 * [Vite](https://vitejs.dev/): *Lightning fast build*
 * [ECS](./libs/ecs/README.md) (Entity, Component, System): *Modular Code Stucture*
 * Tools to generate spritesheet and optimize assets
-* Build for Web, Windows, Mac or Linux
+* Build you games for the Web, or as a standalone application (Windows, Mac or Linux)
 
 ## Templates
 This project will come with a set of predefined templates (flavor) for different type of usages
