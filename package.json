@@ -1,0 +1,12 @@
+{
+  "name": "pixel-builder",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ]
+}

@@ -1,0 +1,6 @@
+.turbo
+coverage
+node_modules
+build
+dist
+apps
