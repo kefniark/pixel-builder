@@ -18,14 +18,14 @@ jobs:
       - runs: yarn
       - name: Test Libs > CLI
         runs: |
-        cd libs/cli
-        yarn lint
+          cd libs/cli
+          yarn lint
       - name: Test Libs > ECS
         runs: |
-        cd lib/ecs
-        yarn lint
-        yarn test
+          cd lib/ecs
+          yarn lint
+          yarn test
       - name: Test Libs > Core
         runs: |
-        cd libs/core
-        yarn lint
+          cd libs/core
+          yarn lint
