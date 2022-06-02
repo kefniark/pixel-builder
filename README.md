@@ -20,7 +20,6 @@ Focus on your game, we take care of your tech stack!
 * Build for Web, Windows, Mac and Linux
 
 ## Features
-
 During the project creation, you will be able to pick between the following features
 
 | Category | Libraries  |   |   |   |
