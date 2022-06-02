@@ -2,4 +2,4 @@
 
 > Still under development
 
-Core of Pixel Builder project, to bootstrap a project 
+Core of Pixel Builder project, to bootstrap a project

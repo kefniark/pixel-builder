@@ -12,6 +12,6 @@
       "name": "[Libs > Core] Run Build",
       "request": "launch",
       "type": "node-terminal"
-    },
+    }
   ]
 }

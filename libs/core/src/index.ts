@@ -1,5 +1,3 @@
-import { mountApp } from './boot'
+import { mountApp } from "./boot"
 
-export {
-    mountApp
-}
+export { mountApp }
