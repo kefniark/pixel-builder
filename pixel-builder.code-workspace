@@ -1,0 +1,39 @@
+{
+  "name": "Pixel Builder",
+  "folders": [
+    {
+      "name": "Libs > CLI",
+      "path": "./libs/cli"
+    },
+    {
+      "name": "Libs > ECS",
+      "path": "./libs/ecs"
+    },
+    {
+      "name": "Libs > Core",
+      "path": "./libs/core"
+    },
+    {
+      "name": "Samples > Pixi",
+      "path": "./apps/pixi"
+    },
+    {
+      "name": "Samples > Minimalist",
+      "path": "./apps/minimalist"
+    },
+    {
+      "name": "Root",
+      "path": "."
+    },
+  ],
+  "launch": {
+    "configurations": [],
+    "compounds": [
+      {
+        "name": "Pixel Buider: Run All",
+        "configurations": [
+        ]
+      }
+    ]
+  }
+}

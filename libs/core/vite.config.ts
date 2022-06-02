@@ -12,7 +12,7 @@ export default defineConfig({
         outDir: './dist',
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
-            name: 'engine',
+            name: 'core',
             formats: ['es'],
             fileName: () => `index.js`
         },

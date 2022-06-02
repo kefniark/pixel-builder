@@ -1,12 +1,10 @@
 <template>
-  <div class="layout">
-    Stuff
-  </div>
+  <div class="layout">Stuff</div>
 </template>
 
 <script lang="ts" setup>
 // disable any system right click
-document.addEventListener('contextmenu', event => event.preventDefault())
+document.addEventListener("contextmenu", (event) => event.preventDefault())
 </script>
 
 <style lang="sass">

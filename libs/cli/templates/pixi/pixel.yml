@@ -1,0 +1,3 @@
+project:
+  assets_folder: src/assets
+  entities_folder: src/entities
