@@ -23,10 +23,10 @@ jobs:
           yarn lint
       - name: Test Libs > ECS
         run: |
-          cd ../ecs
+          cd libs/ecs
           yarn lint
           yarn test
       - name: Test Libs > Core
         run: |
-          cd ../core
+          cd libs/core
           yarn lint
