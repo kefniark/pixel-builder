@@ -22,15 +22,17 @@ Focus on your game, we take care of your tech stack!
 ## Features
 During the project creation, you will be able to pick between the following features
 
-| Category | Libraries  |   |   |   |
-|---|---|---|---|---|
+| Category | Libraries  |   |   |
+|---|---|---|---|
 | Code Structure | [*Entity Component System*](./libs/ecs/README.md) |
 | Renderer | **Minimalist**: Canvas | **2D**: [Pixi.js](https://pixijs.com/) | **3D**: [BabylonJS](https://www.babylonjs.com/) | 
 | Interface | [Vue3](https://vuejs.org/)
 | Physics/Collision | [P2.js](https://github.com/schteppe/p2.js/) |
 | Audio | [Howler.js](https://howlerjs.com/) |
-| Localization | [Vue-i18n](https://kazupon.github.io/vue-i18n/)
-| Data Store | [Pinia](https://pinia.vuejs.org/)
+| Localization | [Vue-i18n](https://kazupon.github.io/vue-i18n/) |
+| Data Store | [Pinia](https://pinia.vuejs.org/) |
+
+Those are just a starter pack of features, feel free to use your own libraries
 
 ---
 
