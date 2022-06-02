@@ -17,15 +17,15 @@ jobs:
           node-version: "16.x"
       - runs: yarn
       - name: Test Libs > CLI
-        runs: |
+        run: |
           cd libs/cli
           yarn lint
       - name: Test Libs > ECS
-        runs: |
+        run: |
           cd lib/ecs
           yarn lint
           yarn test
       - name: Test Libs > Core
-        runs: |
+        run: |
           cd libs/core
           yarn lint
