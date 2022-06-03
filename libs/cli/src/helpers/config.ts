@@ -1,6 +1,5 @@
 import path from "path"
-import { parse } from "yaml"
-import { readFileSync, existsSync, writeFileSync } from "fs"
+import { readFileSync, existsSync } from "fs"
 import merge from "deepmerge"
 
 export interface PixelConfigEntity {
@@ -58,11 +57,11 @@ export const pixelDefaultConfig: PixelConfig = {
 }
 
 export function getPixelConfig() {
-  const p = path.resolve("pixel.yml")
-  if (!existsSync(p)) throw new Error("pixel.yml not found !")
+  const p = path.resolve("package.json")
+  if (!existsSync(p)) throw new Error("package.json not found !")
 
-  const config = parse(readFileSync(p, "utf-8"))
-  return merge(pixelDefaultConfig, config) as PixelConfig
+  const config = JSON.parse(readFileSync(p, "utf-8"))
+  return merge(pixelDefaultConfig, config.pixel ?? {}) as PixelConfig
 }
 
 export function toNumber(val: number | string, def: number) {

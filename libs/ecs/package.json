@@ -4,6 +4,11 @@
   "description": "",
   "module": "dist/index.js",
   "types": "./dist/ecs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "private": false,
   "files": [
     "dist"
@@ -24,8 +29,8 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
+    "@pixel-builder/core": "*",
     "@vitejs/plugin-vue": "^2.3.2",
-    "c8": "^7.11.3",
     "sass": "^1.51.0",
     "typescript": "^4.6.4",
     "vite": "^2.9.8",

@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Dev Server",
+      "command": "yarn dev",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "name": "Launch Chrome (Debugging Attached)",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "smartStep": true,
+      "trace": true,
+      "url": "http://localhost:1337",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "webRoot": "${workspaceFolder}/src"
+    }
+  ]
+}

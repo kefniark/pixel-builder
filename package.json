@@ -4,9 +4,21 @@
   "description": "",
   "private": true,
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn turbo run build",
+    "format": "yarn turbo run format",
+    "lint": "yarn turbo run lint",
+    "test": "yarn turbo run test"
+  },
   "workspaces": [
     "apps/*",
     "libs/*"
-  ]
+  ],
+  "devDependencies": {
+    "turbo": "^1.2.3"
+  },
+  "engines": {
+    "node": ">= 16.0.0"
+  }
 }

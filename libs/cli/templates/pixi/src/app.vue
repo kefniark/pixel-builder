@@ -26,6 +26,7 @@ html, body
 .layout
   z-index: 1
   position: relative
+  overflow: hidden
 
   // scaling
   width: 100vw
@@ -33,10 +34,4 @@ html, body
   @media (min-aspect-ratio: 1280/720)
     width: auto
     height: 100vh
-
-  // background
-  background: url(/assets/background.png)
-  background-repeat: no-repeat
-  background-size: cover
-  pointer-events: none
 </style>

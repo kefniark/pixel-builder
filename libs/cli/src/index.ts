@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander"
 import pack from "./commands/pack"
-import dev from "./commands/dev"
-import build from "./commands/build"
+import { dev, build, preview } from "./commands/build"
 import create from "./commands/create"
 
 const program = new Command()
@@ -30,9 +29,8 @@ program
 
 // Dev : Use Vite Dev Server to run Project
 program.command("dev").description("Run a Pixel Project").action(dev)
-
-// Build : Create a final build
 program.command("build").description("Build a Project Project").action(build)
+program.command("preview").description("Preview a Build of a Pixel Project").action(preview)
 
 // Parse
 program.parse(process.argv)
