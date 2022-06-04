@@ -1,6 +1,9 @@
 .turbo
-coverage
+.temp
+.cache
 node_modules
+
+coverage
 build
 dist
 apps
