@@ -1,8 +1,12 @@
-## Pixel-Builder - ECS
-
-> Still under development
+## Pixel-Builder - ECS 🚀
 
 Entity Component System for Pixel Builder.
+
+For more informations, please check our [Pixel Builder Website](https://kefniark.github.io/pixel-builder/)
+
+---
+
+## Description ✈️
 
 The goal of this ECS is to be lightweight, accessible, not verbose and fully typed.
 
@@ -10,7 +14,7 @@ If you are looking for something more advanced and focused on performances, I wo
 
 ---
 
-## Getting Started
+## Getting Started 📦
 
 ### Create a world
 
@@ -61,7 +65,7 @@ world.updateSystems("move", time)
 
 ---
 
-## Extra
+## Extra 💥
 
 ### World Context
 

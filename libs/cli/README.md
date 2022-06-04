@@ -1,7 +1,5 @@
 ## Pixel-Builder - CLI
 
-> Still under development
-
 CLI Tools to build Pixel Project
 
 ```sh
@@ -15,18 +13,4 @@ pixel dev
 pixel build
 ```
 
-and coming soon
-
-```sh
-# Create a new project
-pixel create name
-
-# Auto format code & config
-pixel format
-
-# Linting code
-pixel lint
-
-# Run unit tests
-pixel test
-```
+For more informations, please check our [Pixel Builder Website](https://kefniark.github.io/pixel-builder/)
