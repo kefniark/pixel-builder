@@ -1,0 +1,1 @@
+const e={key:"v-bf37bcac",path:"/template/pixijs.html",title:"PixiJS",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:165433944e4,contributors:[{name:"Kefniark",email:"kevin@destrem.net",commits:1}]},filePathRelative:"template/pixijs.md"};export{e as data};
