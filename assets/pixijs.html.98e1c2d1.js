@@ -1,1 +1,0 @@
-import{_ as s,o as t,c as i,b as e,d as a}from"./app.247a0954.js";const o={},c=e("h1",{id:"pixijs",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#pixijs","aria-hidden":"true"},"#"),a(" PixiJS")],-1),r=e("p",null,"Soon",-1),n=[c,r];function _(d,l){return t(),i("div",null,n)}var x=s(o,[["render",_],["__file","pixijs.html.vue"]]);export{x as default};
