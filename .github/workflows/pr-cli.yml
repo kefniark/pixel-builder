@@ -1,4 +1,4 @@
-name: ⚙️ Tests
+name: ⚙️ CLI Tests
 
 on:
   push:
