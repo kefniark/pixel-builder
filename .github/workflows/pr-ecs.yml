@@ -1,6 +1,7 @@
 name: ⚙️ ECS Tests
 
 on:
+  workflow_dispatch:
   push:
     branches: [ develop ]
     paths:

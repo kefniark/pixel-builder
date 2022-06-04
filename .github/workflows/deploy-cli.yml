@@ -1,18 +1,14 @@
-name: ⚙️ Core Tests
+name: 🚀 Deploy CLI
 
 on:
   workflow_dispatch:
   push:
-    branches: [ develop ]
+    branches: [ main ]
     paths:
-      - libs/core/**
-  pull_request:
-    branches: [ develop ]
-    paths:
-      - libs/core/**
+      - libs/cli/**
 
 jobs:
-  test-core:
+  deploy-cli:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,9 +16,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "16.x"
+          registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: yarn
-      - name: Test Libs > Core
+      - name: Build
         run: |
-          cd libs/core
-          yarn lint
+          cd libs/cli
+          yarn build
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

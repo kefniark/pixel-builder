@@ -19,6 +19,9 @@ export interface PixelConfigAsset {
 }
 
 export interface PixelConfig {
+  build: {
+    mode: "web" | "desktop" | "zip"
+  }
   project: {
     assets_folder: string
     entities_folder: string
@@ -46,6 +49,9 @@ export const pixelDefaultAsset: PixelConfigAsset = {
 }
 
 export const pixelDefaultConfig: PixelConfig = {
+  build: {
+    mode: "web",
+  },
   project: {
     assets_folder: "src/assets",
     entities_folder: "src/entities",

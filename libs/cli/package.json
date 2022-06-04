@@ -1,6 +1,6 @@
 {
   "name": "@pixel-builder/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "bin": {
     "pixel": "./dist/index.js"
@@ -20,6 +20,8 @@
   "dependencies": {
     "@neutralinojs/neu": "^9.3.0",
     "@rollup/pluginutils": "^4.2.1",
+    "adm-zip": "^0.5.9",
+    "advzip-bin": "^2.0.0",
     "binpacking": "^0.0.1",
     "commander": "^9.2.0",
     "crc": "^4.1.1",
@@ -27,12 +29,14 @@
     "ejs": "^3.1.8",
     "glob": "^8.0.3",
     "inquirer": "^8.2.4",
+    "roadroller": "^2.1.0",
     "sharp": "^0.30.4",
     "shelljs": "^0.8.5",
     "vite-plugin-auto-zip": "^1.0.4"
   },
   "devDependencies": {
     "@pixel-builder/core": "*",
+    "@types/adm-zip": "^0.5.0",
     "@types/crc": "^3.4.0",
     "@types/ejs": "^3.1.1",
     "@types/inquirer": "^8.2.1",
