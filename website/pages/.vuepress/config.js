@@ -4,6 +4,7 @@ module.exports = {
     lang: 'en-US',
     title: 'Pixel Builder',
     description: 'Modern Framework to build HTML5 games',
+    base: '/pixel-builder/',
     theme: defaultTheme({
         darkMode: false,
         repo: 'https://github.com/kefniark/pixel-builder',
