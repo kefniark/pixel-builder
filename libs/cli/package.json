@@ -1,6 +1,6 @@
 {
   "name": "@pixel-builder/cli",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "",
   "bin": {
     "pixel": "./dist/index.js"
