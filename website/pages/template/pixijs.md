@@ -1,3 +1,3 @@
 # PixiJS
 
-Description to come
+Soon
