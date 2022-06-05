@@ -1,8 +1,8 @@
 # Pixel Builder 🚀
 
-**Modern Framework to build HTML5 games**
-
 > Still under development
+
+![](./pixel-builder-banner.gif)
 
 ### 🔗[Getting Started !](https://kefniark.github.io/pixel-builder/getting-started.html)
 
@@ -46,4 +46,4 @@ yarn dev
 
 - [@pixel-builder/ecs](./libs/ecs/README.md): ECS for Pixel Builder
 - [@pixel-builder/cli](./libs/cli/): CLI tool to create, build your Pixel Project
-- [@pixel-builder/core](./libs/core/): Helpers to make project configuration easier
+- [@pixel-builder/core](./libs/core/): Helpers to make project bootstrap easier

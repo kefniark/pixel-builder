@@ -26,3 +26,11 @@ export function genId() {
   }
   return `${prefix.toString(16)}-${gen.toString(16)}`
 }
+
+export function random<T>(len: number, arr: T[]): T[] {
+  const s = new Set<T>()
+  while (s.size < len && s.size !== arr.length) {
+    s.add(arr[Math.floor(Math.random() * arr.length)])
+  }
+  return [...s]
+}

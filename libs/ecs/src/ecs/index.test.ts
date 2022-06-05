@@ -21,56 +21,56 @@ describe("Entity & Components", () => {
 
   test("Component Remove", () => {
     const world = createWorld({}, { test: { a: 1, b: 0 } })
-    const ent = world.createQuery(["test"])
+    const query = world.createQuery(["test"])
 
     const entity = world.createEntity(["test"])
 
     // after creation
-    expect(ent("added")).toEqual([entity])
-    expect(ent()).toEqual([entity])
-    expect(ent("removed")).toEqual([])
+    expect([...query.added()]).toEqual([entity.__uuid])
+    expect(query.entities()).toEqual([entity])
+    expect([...query.removed()]).toEqual([])
 
     world.cleanup()
     world.removeComponent(entity, "test")
 
     // after deletion
-    expect(ent("added")).toEqual([])
-    expect(ent()).toEqual([entity])
-    expect(ent("removed")).toEqual([entity])
+    expect([...query.added()]).toEqual([])
+    expect(query.entities()).toEqual([entity])
+    expect([...query.removed()]).toEqual([entity.__uuid])
 
     world.cleanup()
 
     // one frame later
-    expect(ent("added")).toEqual([])
-    expect(ent()).toEqual([])
-    expect(ent("removed")).toEqual([])
+    expect([...query.added()]).toEqual([])
+    expect(query.entities()).toEqual([])
+    expect([...query.removed()]).toEqual([])
   })
 
   test("Component Entity", () => {
     const world = createWorld({}, { test: { a: 1, b: 0 } })
-    const ent = world.createQuery(["test"])
+    const query = world.createQuery(["test"])
 
     const entity = world.createEntity(["test"])
 
     // after creation
-    expect(ent("added")).toEqual([entity])
-    expect(ent()).toEqual([entity])
-    expect(ent("removed")).toEqual([])
+    expect([...query.added()]).toEqual([entity.__uuid])
+    expect(query.entities()).toEqual([entity])
+    expect([...query.removed()]).toEqual([])
 
     world.cleanup()
     world.removeEntity(entity)
 
     // after deletion
-    expect(ent("added")).toEqual([])
-    expect(ent()).toEqual([entity])
-    expect(ent("removed")).toEqual([entity])
+    expect([...query.added()]).toEqual([])
+    expect(query.entities()).toEqual([entity])
+    expect([...query.removed()]).toEqual([entity.__uuid])
 
     world.cleanup()
 
     // one frame later
-    expect(ent("added")).toEqual([])
-    expect(ent()).toEqual([])
-    expect(ent("removed")).toEqual([])
+    expect([...query.added()]).toEqual([])
+    expect(query.entities()).toEqual([])
+    expect([...query.removed()]).toEqual([])
   })
 })
 
@@ -85,24 +85,24 @@ describe("Queries", () => {
     const b = world.createEntity(["test2"])
     const c = world.createEntity(["test", "test2"])
 
-    expect(q1("added")).toEqual([a, c])
-    expect(q1()).toEqual([a, c])
-    expect(q2()).toEqual([b, c])
+    expect([...q1.added()]).toEqual([a.__uuid, c.__uuid])
+    expect(q1.entities()).toEqual([a, c])
+    expect(q2.entities()).toEqual([b, c])
 
     world.cleanup()
 
-    expect(q1("added")).toEqual([])
-    expect(q1()).toEqual([a, c])
+    expect([...q1.added()]).toEqual([])
+    expect(q1.entities()).toEqual([a, c])
 
     const d = world.createEntity(["test"])
 
-    expect(q1("added")).toEqual([d])
-    expect(q1()).toEqual([a, c, d])
+    expect([...q1.added()]).toEqual([d.__uuid])
+    expect(q1.entities()).toEqual([a, c, d])
 
     world.cleanup()
 
-    expect(q1("added")).toEqual([])
-    expect(q1()).toEqual([a, c, d])
+    expect([...q1.added()]).toEqual([])
+    expect(q1.entities()).toEqual([a, c, d])
   })
 
   test("Create Query After", () => {
@@ -115,24 +115,24 @@ describe("Queries", () => {
     const q1 = world.createQuery(["test"])
     const q2 = world.createQuery(["test2"])
 
-    expect(q1("added")).toEqual([a, c])
-    expect(q1()).toEqual([a, c])
-    expect(q2()).toEqual([b, c])
+    expect([...q1.added()]).toEqual([a.__uuid, c.__uuid])
+    expect(q1.entities()).toEqual([a, c])
+    expect(q2.entities()).toEqual([b, c])
 
     world.cleanup()
 
-    expect(q1("added")).toEqual([])
-    expect(q1()).toEqual([a, c])
+    expect([...q1.added()]).toEqual([])
+    expect(q1.entities()).toEqual([a, c])
 
     const d = world.createEntity(["test"])
 
-    expect(q1("added")).toEqual([d])
-    expect(q1()).toEqual([a, c, d])
+    expect([...q1.added()]).toEqual([d.__uuid])
+    expect(q1.entities()).toEqual([a, c, d])
 
     world.cleanup()
 
-    expect(q1("added")).toEqual([])
-    expect(q1()).toEqual([a, c, d])
+    expect([...q1.added()]).toEqual([])
+    expect(q1.entities()).toEqual([a, c, d])
   })
 })
 

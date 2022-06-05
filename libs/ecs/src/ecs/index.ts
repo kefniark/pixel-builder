@@ -1,4 +1,4 @@
-import { genId, intersects, union } from "./helpers"
+import { genId, intersects, random, union } from "./helpers"
 import { Entity, Query, System } from "./interfaces"
 export * from "./interfaces"
 
@@ -44,7 +44,8 @@ export class World<X, C> {
     return entity as any
   }
 
-  removeEntity(entity: Entity) {
+  removeEntity(entity: Entity | undefined) {
+    if (!entity) return
     this.entityRemove.add(entity.__uuid)
     for (const componentName of Object.keys(entity)) {
       if (componentName === "__uuid") continue
@@ -66,7 +67,7 @@ export class World<X, C> {
     this.updateComponents(name, entity.__uuid, "removed")
   }
 
-  createQuery<N extends keyof C>(names: N[]): (event?: "added" | "removed") => (Entity & { [P in N]: C[P] })[] {
+  createQuery<N extends keyof C>(names: N[]): { added: () => Set<string>, removed: () => Set<string>, random: (n: number) => (Entity & { [P in N]: C[P] })[], entities: () => (Entity & { [P in N]: C[P] })[] } {
     const id = genId()
     const query: Query = {
       __uuid: id,
@@ -95,20 +96,31 @@ export class World<X, C> {
     this.queries[id] = query
     names.forEach((x) => this.componentQueries[x as string].add(id))
 
-    return (event) => {
+    const refresh = () => {
       query.executed = true
       if (query.changed) {
         this.updateQuery(query)
         query.changed = false
       }
-      let entityIds = [...query.entity_ids]
-      if (event === "added") {
-        entityIds = [...query.entity_added]
-      } else if (event === "removed") {
-        entityIds = [...query.entity_removed]
-      }
+    }
 
-      return entityIds.map((x) => this.entities[x]) as any
+    return {
+      added: () => {
+        refresh()
+        return query.entity_added
+      },
+      removed: () => {
+        refresh()
+        return query.entity_removed
+      },
+      entities: () => {
+        refresh()
+        return [...query.entity_ids].map((x) => this.entities[x]) as any
+      },
+      random: (num) => {
+        refresh()
+        return random(num, [...query.entity_ids]).map((x) => this.entities[x]) as any
+      }
     }
   }
 
