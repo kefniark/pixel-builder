@@ -26,6 +26,10 @@
       "path": "./website"
     },
     {
+      "name": "Examples",
+      "path": "./examples"
+    },
+    {
       "name": "Root",
       "path": "."
     },

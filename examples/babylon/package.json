@@ -1,0 +1,36 @@
+{
+  "name": "examples-babylon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "pixel dev",
+    "build": "pixel build",
+    "preview": "pixel preview",
+    "format": "prettier \"**/*.{ts,vue,json,md}\" -w",
+    "lint": "prettier \"**/*.{ts,vue,json,md}\" -c",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run",
+    "packer": "pixel pack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@pixel-builder/engine": "*",
+    "@pixel-builder/ecs": "*",
+    "babylonjs": "^5.9.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2",
+    "@pixel-builder/cli": "*"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 120
+  },
+  "pixel": {}
+}

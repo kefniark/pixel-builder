@@ -80,19 +80,21 @@ function postProcess(options: CreateOptions) {
   return true
 }
 
-export default async (name: string) => {
+export default async (name: string, args: { template: string; features: string }) => {
   const root = path.resolve(".").replace(/\\/g, "/")
   const targetPath = path.join(root, name).replace(/\\/g, "/")
   if (existsSync(targetPath)) return console.log(`Folder ${targetPath} exists. Delete or use another name.`)
 
+  console.log(args)
   const answers = await inquirer.prompt([
     {
       type: "list",
       name: "renderer",
       message: "Which project template do you want ?",
+      when: () => !args.template?.trim(),
       choices: [
         { name: "2D (pixi.js)", value: "pixi" },
-        // { name: "3D (babylon.js)", value: "babylon" },
+        { name: "3D (babylon.js)", value: "babylon" },
         { name: "Minimalist (canvas)", value: "mini" },
       ],
     },
@@ -111,6 +113,7 @@ export default async (name: string) => {
       name: "features",
       message: "Which features do you need?",
       pageSize: 12,
+      when: () => !args.features?.trim(),
       choices: [
         new inquirer.Separator(`--- Tooling ---`),
         {
@@ -167,18 +170,22 @@ export default async (name: string) => {
     return path.join(__dirname, "../..", base, subfolder).replace(/\\/g, "/")
   }
 
-  const templatePath = getTemplate("templates", answers.renderer)
+  // get values from either arg parameter or questions
+  const renderer = args.template ? args.template : answers.renderer
+  const features = args.features ? args.features.split(",") : answers.features
+
+  const templatePath = getTemplate("templates", renderer)
   if (!createProject(targetPath)) return
   const options: CreateOptions = {
     root,
     projectName: name.replace(/[\W_]/g, "-"),
     templatePath,
     targetPath,
-    useLint: answers.features.includes("lint"),
-    useTest: answers.features.includes("test"),
-    useGit: answers.features.includes("git"),
-    useGithub: answers.features.includes("github"),
-    useVSCode: answers.features.includes("vscode"),
+    useLint: features.includes("lint"),
+    useTest: features.includes("test"),
+    useGit: features.includes("git"),
+    useGithub: features.includes("github"),
+    useVSCode: features.includes("vscode"),
   }
 
   console.log(" > Copying Files")

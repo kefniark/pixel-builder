@@ -67,7 +67,14 @@ export class World<X, C> {
     this.updateComponents(name, entity.__uuid, "removed")
   }
 
-  createQuery<N extends keyof C>(names: N[]): { added: () => Set<string>, removed: () => Set<string>, random: (n: number) => (Entity & { [P in N]: C[P] })[], entities: () => (Entity & { [P in N]: C[P] })[] } {
+  createQuery<N extends keyof C>(
+    names: N[]
+  ): {
+    added: () => Set<string>
+    removed: () => Set<string>
+    random: (n: number) => (Entity & { [P in N]: C[P] })[]
+    entities: () => (Entity & { [P in N]: C[P] })[]
+  } {
     const id = genId()
     const query: Query = {
       __uuid: id,
@@ -120,7 +127,7 @@ export class World<X, C> {
       random: (num) => {
         refresh()
         return random(num, [...query.entity_ids]).map((x) => this.entities[x]) as any
-      }
+      },
     }
   }
 

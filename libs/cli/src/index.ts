@@ -8,7 +8,13 @@ const program = new Command()
 
 program.name("Pixel Builder").description("CLI to create and build HTML5 Games")
 
-program.command("create").description("Create a new pixel project").argument("[string]", "project name").action(create)
+program
+  .command("create")
+  .description("Create a new pixel project")
+  .argument("[string]", "project name")
+  .option("-t, --template <string>", "Pick a template to use (pixi, babylon, mini)")
+  .option("-f, --features <string>", "Pick features (git, vscode, lint, test, github)")
+  .action(create)
 
 // Dev : Use Vite Dev Server to run Project
 program
