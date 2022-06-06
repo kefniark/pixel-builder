@@ -24,7 +24,9 @@ jobs:
           yarn lint
           yarn build
       - name: Build Examples 🔧
-        run: sh ./examples.sh
+        run: |
+        yarn
+        sh ./examples.sh
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:

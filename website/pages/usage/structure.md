@@ -2,7 +2,7 @@
 
 ## Description
 
-The folder structure is quite standard for a vue project and quite minimal
+The folder structure is quite standard for a vue project and quite minimal:
 
 - `public/`: Everything in this folder will be copied over to the build (favicon, robot.txt, ...)
 - `src/`:
