@@ -7,6 +7,8 @@ module.exports = {
     base: '/pixel-builder/',
     theme: defaultTheme({
         darkMode: false,
+        editLink: false,
+        editLinkText: '',
         repo: 'https://github.com/kefniark/pixel-builder',
         sidebar: [
             {

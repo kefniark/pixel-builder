@@ -2,6 +2,8 @@
 lang: en-US
 title: Pixel Builder
 home: true
+heroText: " "
+heroImage: https://raw.githubusercontent.com/kefniark/pixel-builder/develop/pixel-builder-banner.gif
 actions:
   - text: Get Started
     link: /getting-started
