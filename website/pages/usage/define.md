@@ -54,7 +54,7 @@ This also allow to have conditional libraries import, only in development and st
 
 **Warning**: those constants are not true variables, they are replaced at build time with a string replacement.
 
-For boolean and numbers this is not a problem, but for string you have to be careful with the lack of quotes
+For boolean and numbers this is not a problem, but for string you have to be careful with the lack of quotes.
 
 ```js
 // this work work

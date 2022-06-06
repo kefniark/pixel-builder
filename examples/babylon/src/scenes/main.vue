@@ -56,7 +56,7 @@ const initialize = async (canvas: HTMLCanvasElement) => {
 
     // Show Debug Layer only in development
     if (BABYLON_DEBUG_LAYER) {
-      await import('../game/debug')
+      await import("../game/debug")
       scene.debugLayer.show()
     }
 
