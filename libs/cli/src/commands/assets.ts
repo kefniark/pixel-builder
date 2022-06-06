@@ -28,7 +28,7 @@ export function assetTransform() {
     const baseURL = url.host ? new URL(url.origin + url.pathname) : new URL(url.protocol + url.pathname)
     const fileHash = crc32(readFileSync(imgPath)).toString(16)
     const hash = createHash("sha1")
-      .update(baseURL.href)
+      .update(baseURL.pathname)
       .update(JSON.stringify({ ...config, crc: fileHash }))
       .digest("hex")
 
@@ -89,12 +89,11 @@ export function assetTransform() {
       if (!filter(id)) return null
 
       const srcURL = parseURL(id)
-      console.log("load", id, srcURL)
       const newid = generateAssetId(id, srcURL, options)
 
-      const tmpPath = await processAsset(srcURL.href, newid)
+      const tmpPath = await processAsset(srcURL.pathname, newid)
       assetsToCopy.set(`/${resourceFolder}/${newid}.webp`, {
-        src: srcURL.href,
+        src: srcURL.pathname,
         cache: tmpPath,
         id: newid,
       })
