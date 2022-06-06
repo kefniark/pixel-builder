@@ -15,5 +15,5 @@ features:
     details: We dont enforce any engine, pick the one you like
   - title: Powerful Build System
     details: Make your build game lighter and faster
-footer: © Pixel Builder
+footer: ©Pixel Builder
 ---
