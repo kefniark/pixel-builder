@@ -15,9 +15,16 @@ The folder structure is quite standard for a vue project and quite minimal
 
 ## Path Alias
 
-To facilitate import of files across the projects, and avoid crazy relative path like `../../../../index.ts`
+To make import of files across the projects easier, and avoid crazy relative path like `../../../../index.ts`
 
 Few alias are available:
 
 - `@src` : Root of the source code `./src`
 - `@assets` : Root of the asset folder `./src/assets`
+
+Examples:
+
+```ts
+import { Board } from "@src/game/board"
+import BoardSprite from "@assets/game/board.png"
+```
