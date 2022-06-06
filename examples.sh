@@ -7,6 +7,9 @@ rm -rf ./website/pages/.vuepress/dist/examples
 mkdir -p ./examples
 mkdir -p ./website/pages/.vuepress/dist/examples
 
+# Enforce tools install (like pixel)
+yarn
+
 # Pixi Example
 echo "Create PixiJS Example"
 yarn pixel create examples/pixi -t pixi -f lint,test
@@ -14,7 +17,7 @@ cd examples/pixi
 yarn build
 cd ../..
 mv ./examples/pixi/build/web ./website/pages/.vuepress/dist/examples/pixi
-    
+
 # BabylonJS Example
 echo "Create BabylonJS Example"
 yarn pixel create examples/babylon -t babylon -f lint,test
