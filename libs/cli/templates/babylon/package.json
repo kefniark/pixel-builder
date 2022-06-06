@@ -28,7 +28,8 @@
   "dependencies": {
     "@pixel-builder/engine": "*",
     "@pixel-builder/ecs": "*",
-    "babylonjs": "^5.9.0"
+    "@babylonjs/core": "^5.9.0",
+    "@babylonjs/inspector": "^5.9.0"
   },
   "devDependencies": {
     <% if(useLint){ %>
@@ -42,5 +43,18 @@
     "printWidth": 120
   },
   <% } %>
-  "pixel": {}
+  "pixel": {
+    "define": {
+      "develop": {
+        "BABYLON_DEBUG_LAYER": true,
+        "APP_VERSION": "\"dev\"",
+        "APP_DEBUG": true
+      },
+      "production": {
+        "BABYLON_DEBUG_LAYER": false,
+        "APP_VERSION": "prod",
+        "APP_DEBUG": true
+      }
+    }
+  }
 }

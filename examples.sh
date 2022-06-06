@@ -15,7 +15,7 @@ yarn build
 echo "Create PixiJS Example"
 node libs/cli/dist/index.js create examples/pixi -t pixi -f lint,test
 cd examples/pixi
-yarn build
+yarn build -- --base=/pixel-builder/examples/pixi/
 cd ../..
 mv ./examples/pixi/build/web ./website/pages/.vuepress/dist/examples/pixi
 
@@ -23,7 +23,7 @@ mv ./examples/pixi/build/web ./website/pages/.vuepress/dist/examples/pixi
 echo "Create BabylonJS Example"
 node libs/cli/dist/index.js create examples/babylon -t babylon -f lint,test
 cd examples/babylon
-yarn build
+yarn build -- --base=/pixel-builder/examples/babylon/
 cd ../..
 mv ./examples/babylon/build/web ./website/pages/.vuepress/dist/examples/babylon
 
@@ -31,6 +31,6 @@ mv ./examples/babylon/build/web ./website/pages/.vuepress/dist/examples/babylon
 echo "Create JS13K Example"
 node libs/cli/dist/index.js create examples/js13k -t mini -f lint,test
 cd examples/js13k
-yarn build
+yarn build -- --base=/pixel-builder/examples/js13k/
 cd ../..
 mv ./examples/js13k/build/web ./website/pages/.vuepress/dist/examples/js13k

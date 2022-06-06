@@ -35,7 +35,10 @@ program
 
 // Dev : Use Vite Dev Server to run Project
 program.command("dev").description("Run a Pixel Project").action(dev)
-program.command("build").description("Build a Project Project").action(build)
+program.command("build")
+  .description("Build a Project Project")
+  .option("-b, --base <string>", "Base of the URL (if deployed in a sub folder)")
+  .action(build)
 program.command("preview").description("Preview a Build of a Pixel Project").action(preview)
 
 // Parse

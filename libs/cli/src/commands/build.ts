@@ -11,17 +11,20 @@ const advzip = require("advzip-bin")
 
 const plugins = [vue(), assetTransform()]
 
-const buildOpt: BuildOptions = {
-  polyfillModulePreload: false,
-  minify: "terser",
-  outDir: path.resolve("build/web"),
-  emptyOutDir: true,
-  terserOptions: {
-    ecma: 2020,
-    module: true,
-    sourceMap: false,
-    toplevel: true,
-  },
+function getBuildOptions(opt: Partial<BuildOptions> = {}) {
+  const buildOpt: BuildOptions = {
+    polyfillModulePreload: false,
+    minify: "terser",
+    outDir: path.resolve("build/web"),
+    emptyOutDir: true,
+    terserOptions: {
+      ecma: 2020,
+      module: true,
+      sourceMap: false,
+      toplevel: true,
+    }
+  }
+  return Object.assign({}, buildOpt, opt)
 }
 
 const optimize = async (buildFolder: string, compressedFolder: string, files: string[]) => {
@@ -83,8 +86,8 @@ ${secondLine}
   console.log(`Size: ${Math.round((res.size / 1024) * 100) / 100}KB`)
 }
 
-export const build = async () => {
-  console.log("[Pixel Builder] Build Command")
+export const build = async (options: { base: string }) => {
+  console.log("[Pixel Builder] Build Command", options)
   const config = getPixelConfig()
   const def = config.define["production"] ?? {}
   if (!existsSync(".pixel")) mkdirSync(".pixel")
@@ -96,7 +99,8 @@ export const build = async () => {
     define: def,
     publicDir: "../public",
     mode: "production",
-    build: buildOpt,
+    base: options.base ?? '/',
+    build: getBuildOptions(),
     resolve: {
       alias: {
         "@assets": path.resolve(process.cwd(), "./src/assets/"),
@@ -122,7 +126,7 @@ export const preview = async () => {
     root: path.resolve("src"),
     plugins,
     publicDir: "../public",
-    build: buildOpt,
+    build: getBuildOptions(),
     preview: {
       port: 8080,
       open: true,
@@ -149,7 +153,7 @@ export const dev = async () => {
     define: def,
     publicDir: "../public",
     mode: "develop",
-    build: buildOpt,
+    build: getBuildOptions(),
     server: {
       port: 1337,
     },
