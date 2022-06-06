@@ -40,7 +40,7 @@ export function assetTransform() {
   const url = (url: string) => normalizePath(path.join(url))
   const processAsset = async (input: string, id: string) => {
     const tmpPathDir = path.join("./.pixel/cache")
-    const tmpPath = path.join(tmpPathDir, `${id}.webp`)
+    const tmpPath = path.join(tmpPathDir, `${id}.webp`).replace(/\\/g, "/")
     if (!existsSync(".pixel")) mkdirSync(".pixel")
     if (!existsSync(tmpPathDir)) mkdirSync(tmpPathDir)
     if (!existsSync(tmpPath)) {
@@ -64,7 +64,7 @@ export function assetTransform() {
     enforce: "pre",
     configResolved(cfg) {},
     async generateBundle({ file, dir }) {
-      // console.log('generateBundle', file, dir, assetsToCopy)
+      console.log("generateBundle", file, dir, assetsToCopy)
       const outputDir = path.join(dir, resourceFolder)
       if (!existsSync(outputDir)) mkdirSync(outputDir)
       for (const asset of assetsToCopy.values()) {
@@ -82,14 +82,14 @@ export function assetTransform() {
 
       const srcURL = parseURL(id)
       const newid = generateAssetId(path.join("./src", id), srcURL, options)
-      // console.log('resolve id', id, importer, `/${resourceFolder}/${newid}.webp`)
+      console.log("resolve id", id, importer, `/${resourceFolder}/${newid}.webp`)
       return url(`/${resourceFolder}/${newid}.webp`)
     },
     async load(id) {
       if (!filter(id)) return null
 
       const srcURL = parseURL(id)
-      // console.log('load', id, srcURL)
+      console.log("load", id, srcURL)
       const newid = generateAssetId(id, srcURL, options)
 
       const tmpPath = await processAsset(srcURL.href, newid)

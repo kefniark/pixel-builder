@@ -21,7 +21,7 @@ pixel create ProjectName
 
 You will be asked few questions about what kind of project and options you would like.
 
-Then when you finished
+Then when it's finished
 
 ```sh
 # open your project

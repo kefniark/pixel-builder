@@ -22,7 +22,7 @@ function getBuildOptions(opt: Partial<BuildOptions> = {}) {
       module: true,
       sourceMap: false,
       toplevel: true,
-    }
+    },
   }
   return Object.assign({}, buildOpt, opt)
 }
@@ -99,7 +99,7 @@ export const build = async (options: { base: string }) => {
     define: def,
     publicDir: "../public",
     mode: "production",
-    base: options.base ?? '/',
+    base: options.base ?? "/",
     build: getBuildOptions(),
     resolve: {
       alias: {
