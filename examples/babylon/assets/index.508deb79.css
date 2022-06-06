@@ -1,0 +1,1 @@
+html,body{padding:0;margin:0;user-select:none;background:#111}#app{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center}.layout{z-index:1;position:relative;overflow:hidden;width:100vw;aspect-ratio:1280/720}@media (min-aspect-ratio: 1280/720){.layout{width:auto;height:100vh}}
