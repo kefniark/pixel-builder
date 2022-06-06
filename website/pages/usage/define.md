@@ -48,7 +48,7 @@ if (APP_DEBUG) {
 }
 ```
 
-This also allow to have conditional libraries import, only for development purpose
+This also allow to have conditional libraries import, only in development and strip from the build
 
 ### String Constants (and quotes)
 
