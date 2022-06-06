@@ -12,3 +12,12 @@ The folder structure is quite standard for a vue project and quite minimal
   - `index.html`: The base HTML of the app
   - `index.ts`: Bootstrap of the app
 - `package.json`: The manifest of the project
+
+## Path Alias
+
+To facilitate import of files across the projects, and avoid crazy relative path like `../../../../index.ts`
+
+Few alias are available:
+
+- `@src` : Root of the source code `./src`
+- `@assets` : Root of the asset folder `./src/assets`
