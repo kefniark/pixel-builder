@@ -31,12 +31,12 @@
   "devDependencies": {
     "@pixel-builder/core": "*",
     "@vitejs/plugin-vue": "^2.3.2",
+    "prettier": "^2.6.2",
     "sass": "^1.51.0",
     "typescript": "^4.6.4",
     "vite": "^2.9.8",
     "vitest": "^0.13.0",
-    "vue-tsc": "^0.34.11",
-    "prettier": "^2.6.2"
+    "vue-tsc": "^0.34.11"
   },
   "prettier": {
     "semi": false,

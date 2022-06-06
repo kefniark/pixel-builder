@@ -14,8 +14,7 @@
   },
   "workspaces": [
     "apps/*",
-    "libs/*",
-    "examples/*"
+    "libs/*"
   ],
   "devDependencies": {
     "turbo": "^1.2.3",

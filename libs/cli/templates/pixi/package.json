@@ -28,7 +28,7 @@
   "dependencies": {
     "@pixel-builder/engine": "*",
     "@pixel-builder/ecs": "*",
-    "pixi.js": "^6.3.2"
+    "pixi.js": "^6.4.2"
   },
   "devDependencies": {
     <% if(useLint){ %>
