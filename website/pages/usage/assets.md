@@ -2,7 +2,7 @@
 
 ## Description
 
-One of the key feature of Pixel Builder is the build pipeline. It can detect which assets are used or not, and optimize them on the fly if needed.
+One of the key feature of Pixel Builder is the asset build pipeline. It can detect which assets are used or not, and optimize them on the fly if needed.
 
 This is a guarantee that the build stay small and not polluted with unused assets from early development stages.
 
