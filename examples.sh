@@ -9,6 +9,7 @@ mkdir -p ./website/pages/.vuepress/dist/examples
 
 # Enforce tools install (like pixel)
 yarn
+yarn build
 ls ./node_modules/.bin/
 
 # Pixi Example

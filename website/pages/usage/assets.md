@@ -29,7 +29,7 @@ document.getElementById("hero-img").src = imgUrl
 
 ## Importing Asset as String
 
-Assets can be imported as strings using the ?raw suffix.
+Assets can be imported as strings using the `?raw` suffix.
 
 ```ts
 import shaderString from "@assets/shader.glsl?raw"
