@@ -86,15 +86,23 @@ ${secondLine}
 export const build = async () => {
   console.log("[Pixel Builder] Build Command")
   const config = getPixelConfig()
+  const def = config.define["production"] ?? {}
   if (!existsSync(".pixel")) mkdirSync(".pixel")
   if (!existsSync("build")) mkdirSync("build")
   if (!existsSync("build/web")) mkdirSync("build/web")
   const output = (await builder({
     root: path.resolve("src"),
     plugins,
+    define: def,
     publicDir: "../public",
     mode: "production",
     build: buildOpt,
+    resolve: {
+      alias: {
+        "@assets": path.resolve(process.cwd(), "./src/assets/"),
+        "@src": path.resolve(process.cwd(), "./src/"),
+      },
+    },
   })) as { output: { fileName: string }[] }
 
   if (config.build.mode === "zip") {
@@ -119,6 +127,12 @@ export const preview = async () => {
       port: 8080,
       open: true,
     },
+    resolve: {
+      alias: {
+        "@assets": path.resolve(process.cwd(), "./src/assets/"),
+        "@src": path.resolve(process.cwd(), "./src/"),
+      },
+    },
   })
 
   previewServer.printUrls()
@@ -126,14 +140,24 @@ export const preview = async () => {
 
 export const dev = async () => {
   console.log("[Pixel Builder] Dev Command")
+  const config = getPixelConfig()
+  const def = config.define["develop"] ?? {}
   const server = await createServer({
     configFile: false,
     root: path.resolve("src"),
     plugins,
+    define: def,
     publicDir: "../public",
+    mode: "develop",
     build: buildOpt,
     server: {
       port: 1337,
+    },
+    resolve: {
+      alias: {
+        "@assets": path.resolve(process.cwd(), "./src/assets/"),
+        "@src": path.resolve(process.cwd(), "./src/"),
+      },
     },
   })
   await server.listen()

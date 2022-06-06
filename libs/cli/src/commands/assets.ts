@@ -78,18 +78,19 @@ export function assetTransform() {
     async resolveId(id, importer) {
       if (!filter(id)) return null
       if (id.startsWith(`/${resourceFolder}`)) return
+      if (path.isAbsolute(id)) return
 
       const srcURL = parseURL(id)
       const newid = generateAssetId(path.join("./src", id), srcURL, options)
-      // console.log('resolve id', id, `/${resourceFolder}/${newid}.webp`)
+      // console.log('resolve id', id, importer, `/${resourceFolder}/${newid}.webp`)
       return url(`/${resourceFolder}/${newid}.webp`)
     },
     async load(id) {
       if (!filter(id)) return null
 
       const srcURL = parseURL(id)
+      // console.log('load', id, srcURL)
       const newid = generateAssetId(id, srcURL, options)
-      // console.log('load', id, srcURL, newid)
 
       const tmpPath = await processAsset(srcURL.href, newid)
       assetsToCopy.set(`/${resourceFolder}/${newid}.webp`, {
@@ -98,32 +99,15 @@ export function assetTransform() {
         id: newid,
       })
 
-      // return `new URL(${JSON.stringify(normalizePath((path.join(`/assets/${newid}.webp`)))}), import.meta.url).pathname`
-
       return buildExportCode(path.join(`/${resourceFolder}/${newid}.webp`))
-      // return buildExportCode(path.join(`/${resourceFolder}/${newid}.webp`))
-
-      // return `export default '${url(`/${resourceFolder}/${newid}.webp`)}'`;
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        // console.log('server return', req.url, assetsToCopy.has(req.url || ''))
         const meta = assetsToCopy.get(req.url || "")
         if (meta) {
-          // console.log(meta)
           res.setHeader("Content-Type", `image/webp`)
           res.setHeader("Cache-Control", "max-age=360000")
           return createReadStream(meta.cache).pipe(res)
-          // const imgPath = normalizePath(path.join(server.config.root, req.url))
-          // const srcURL = parseURL(imgPath)
-          // const newid = generateAssetId(imgPath, srcURL, options)
-          // processAsset(srcURL.href, newid)
-          //     .then((tmpPath) => {
-          //         res.setHeader('Content-Type', `image/webp`)
-          //         res.setHeader('Cache-Control', 'max-age=360000')
-          //         return createReadStream(tmpPath).pipe(res)
-          //     })
-          // return
         }
 
         if (filter(req.url) && !req.url?.includes(".pixel")) {
@@ -135,8 +119,6 @@ export function assetTransform() {
             res.setHeader("Cache-Control", "max-age=360000")
             return createReadStream(tmpPath).pipe(res)
           })
-
-          // console.log('server request', server, req.url, srcURL, newid)
           return
         }
 

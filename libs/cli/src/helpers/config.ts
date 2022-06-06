@@ -19,6 +19,7 @@ export interface PixelConfigAsset {
 }
 
 export interface PixelConfig {
+  define: Record<string, Record<string, any>>
   build: {
     mode: "web" | "desktop" | "zip"
   }
@@ -49,6 +50,7 @@ export const pixelDefaultAsset: PixelConfigAsset = {
 }
 
 export const pixelDefaultConfig: PixelConfig = {
+  define: {},
   build: {
     mode: "web",
   },

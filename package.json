@@ -8,16 +8,14 @@
   "scripts": {
     "build": "yarn turbo run build",
     "format": "yarn turbo run format",
-    "examples": "rm -rf examples && mkdir examples && yarn examples:pixi && yarn examples:mini && yarn examples:babylon",
-    "examples:pixi": "yarn pixel create examples/pixi -t pixi -f git,github,lint,test",
-    "examples:mini": "yarn pixel create examples/js13k -t mini -f git,github,lint,test",
-    "examples:babylon": "yarn pixel create examples/babylon -t babylon -f git,github,lint,test",
+    "examples": "./examples.sh",
     "lint": "yarn turbo run lint",
     "test": "yarn turbo run test"
   },
   "workspaces": [
     "apps/*",
-    "libs/*"
+    "libs/*",
+    "examples/*"
   ],
   "devDependencies": {
     "turbo": "^1.2.3"

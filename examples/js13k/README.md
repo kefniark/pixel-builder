@@ -14,16 +14,6 @@ Welcome to your Pixel Builder Project
 
 ## Features
 
-### Git Integration
-
-The repository was configured, you can initialize it and push it where you want (Github, Gitlab, ...)
-
-```sh
-git init
-git add .
-git commit -m "first commit"
-```
-
 ### Lint (Enforce Code Style)
 
 We configured this project with editorconfig and prettier

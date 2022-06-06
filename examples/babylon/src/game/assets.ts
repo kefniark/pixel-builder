@@ -1,9 +1,12 @@
-import { Scene, StandardMaterial, Texture } from "babylonjs"
-import sapphireDiffuse from "../assets/sapphire_color.jpg"
-import sapphireBump from "../assets/sapphire_normal.jpg"
-import stoneDiffuse from "../assets/stone_color.jpg"
-import stoneBump from "../assets/stone_normal.jpg"
-import stoneSpec from "../assets/stone_spec.jpg"
+import { Scene } from "@babylonjs/core/scene"
+import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial"
+import { Texture } from "@babylonjs/core/Materials/Textures/texture"
+
+import sapphireDiffuse from "@assets/sapphire_color.jpg"
+import sapphireBump from "@assets/sapphire_normal.jpg"
+import stoneDiffuse from "@assets/stone_color.jpg"
+import stoneBump from "@assets/stone_normal.jpg"
+import stoneSpec from "@assets/stone_spec.jpg"
 
 export const getMaterial = (name: string, scene: Scene) => {
   if (name === "sapphire") {

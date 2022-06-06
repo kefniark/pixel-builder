@@ -4,29 +4,26 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue"
-import {
-  Engine,
-  Scene,
-  FreeCamera,
-  HemisphericLight,
-  Vector3,
-  CreateGround,
-  CreateSphere,
-  ShadowGenerator,
-  DirectionalLight,
-  Color3,
-  Color4,
-} from "babylonjs"
-import { getMaterial } from "../game"
+import "@babylonjs/core/Lights/Shadows/shadowGeneratorSceneComponent"
+import { Engine } from "@babylonjs/core/Engines/engine"
+import { Scene } from "@babylonjs/core/scene"
+import { FreeCamera } from "@babylonjs/core/Cameras/freeCamera"
+import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight"
+import { Color4, Vector3 } from "@babylonjs/core/Maths/math"
+import { DirectionalLight } from "@babylonjs/core/Lights/directionalLight"
+import { CreateSphere } from "@babylonjs/core/Meshes/Builders/sphereBuilder"
+import { CreateGround } from "@babylonjs/core/Meshes/Builders/groundBuilder"
+import { ShadowGenerator } from "@babylonjs/core/Lights/Shadows/shadowGenerator"
+import { getMaterial } from "@src/game"
 
 const game = ref<HTMLCanvasElement | null>(null)
 onMounted(() => {
   if (game.value) initialize(game.value)
 })
 
-const initialize = (canvas: HTMLCanvasElement) => {
+const initialize = async (canvas: HTMLCanvasElement) => {
   const engine = new Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true })
-  const createScene = function () {
+  const createScene = async function () {
     const scene = new Scene(engine)
     scene.clearColor = new Color4(0, 0, 0, 1)
 
@@ -57,12 +54,18 @@ const initialize = (canvas: HTMLCanvasElement) => {
     shadowGenerator.useExponentialShadowMap = true
     ground.receiveShadows = true
 
-    scene.debugLayer.show()
+    // Show Debug Layer only in development
+    if (BABYLON_DEBUG_LAYER) {
+      await import('../game/debug')
+      scene.debugLayer.show()
+    }
+
+    console.log(`This is my version : ${APP_VERSION}`)
 
     return scene
   }
 
-  const scene = createScene()
+  const scene = await createScene()
   engine.runRenderLoop(() => scene.render())
   window.addEventListener("resize", () => engine.resize())
 }

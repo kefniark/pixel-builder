@@ -1,6 +1,7 @@
 .turbo
 .temp
 .cache
+.pixel
 node_modules
 
 coverage

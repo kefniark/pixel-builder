@@ -25,24 +25,27 @@ module.exports = {
                 text: 'Usage',
                 children: [
                     { text: 'Pixel CLI', link: '/usage/cli' },
-                    { text: 'Folder Structure', link: '/usage/structure' },
+                    { text: 'Project Structure', link: '/usage/structure' },
+                    { text: 'Build', link: '/usage/building' },
+                    { text: 'Define Constant', link: '/usage/define' },
                     { text: 'Assets Handling', link: '/usage/assets' },
-                    { text: 'Styling', link: '/usage/styling' },
-                    { text: 'Building', link: '/usage/building' }
+                    // { text: 'Styling', link: '/usage/styling' }
                 ],
             },
-            {
-                text: 'Tooling',
-                children: [
-                    { text: 'VSCode', link: '/template/pixijs' },
-                    { text: 'Linting', link: '/template/pixijs' },
-                    { text: 'Testing', link: '/template/pixijs' }
-                ],
-            },
+            // {
+            //     text: 'Tooling',
+            //     children: [
+            //         { text: 'VSCode', link: '/template/pixijs' },
+            //         { text: 'Linting', link: '/template/pixijs' },
+            //         { text: 'Testing', link: '/template/pixijs' }
+            //     ],
+            // },
             {
                 text: 'Features',
                 children: [
-                    { text: 'Audio', link: '/features/audio' }
+                    // { text: 'Audio', link: '/features/audio' },
+                    { text: 'Github Action', link: '/features/github' },
+                    { text: 'VSCode', link: '/features/vscode' },
                 ]
             }
         ]
