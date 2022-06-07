@@ -1,6 +1,6 @@
 import { createApp, Component } from "vue"
 import { createI18n, Locale, LocaleMessages, VueMessageType } from "vue-i18n"
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router"
 import { createPinia } from "pinia"
 
 export interface AppConfig {
@@ -15,7 +15,7 @@ export const mountApp = (elementId: string, app: Component, config: AppConfig) =
   const router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes: config.routes || [],
-    history: createWebHistory(),
+    history: createWebHashHistory(),
   })
 
   const locales = config.locales ?? ["en"]

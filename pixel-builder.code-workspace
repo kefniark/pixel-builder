@@ -14,20 +14,8 @@
       "path": "./libs/core"
     },
     {
-      "name": "Samples > Pixi",
-      "path": "./apps/pixi"
-    },
-    {
-      "name": "Samples > Minimalist",
-      "path": "./apps/minimalist"
-    },
-    {
       "name": "Website",
       "path": "./website"
-    },
-    {
-      "name": "Examples",
-      "path": "./examples"
     },
     {
       "name": "Root",

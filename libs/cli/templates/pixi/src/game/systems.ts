@@ -1,6 +1,6 @@
 import { WorldComponents, WorldContext } from "./components"
 import { System, World } from "@pixel-builder/ecs"
-import { Sprite, AnimatedSprite } from "pixi.js"
+import { Sprite } from "pixi.js"
 
 function mod(n: number, m: number) {
   return ((n % m) + m) % m
@@ -27,7 +27,6 @@ export const InputSystem = (world: World<WorldContext, WorldComponents>): System
 
   const queryEntities = world.createQuery(["input"])
   return {
-    name: "Input",
     mounted() {
       document.addEventListener("keydown", pushKey)
       document.addEventListener("keyup", releaseKey)
@@ -37,7 +36,7 @@ export const InputSystem = (world: World<WorldContext, WorldComponents>): System
       document.removeEventListener("keyup", releaseKey)
     },
     update() {
-      for (const ent of queryEntities()) {
+      for (const ent of queryEntities.entities()) {
         ent.input.throttle = driver_throttle
         ent.input.break = driver_break
         ent.input.turn = driver_turn
@@ -50,9 +49,8 @@ export const MovementSystem = (world: World<WorldContext, WorldComponents>): Sys
   const queryEntities = world.createQuery(["input", "position", "velocity"])
 
   return {
-    name: "Movement",
     update(dt) {
-      for (const ent of queryEntities()) {
+      for (const ent of queryEntities.entities()) {
         const forceTraction = ent.input.throttle * 50
         const forceBreak = ent.input.break * -50
         const forceDrag = ent.velocity.speed * Math.abs(ent.velocity.speed) * -0.005
@@ -78,32 +76,27 @@ export const MovementSystem = (world: World<WorldContext, WorldComponents>): Sys
 
 export const SpriteRendererSystem = (world: World<WorldContext, WorldComponents>): System => {
   const sprites = new Map<string, Sprite>()
-  const animatedSprites = new Map<string, AnimatedSprite>()
-
   const querySprites = world.createQuery(["position", "sprite"])
 
   return {
-    name: "SpriteRenderer",
     update() {
       const { app, spritesheets } = world.context
 
-      for (const entity of querySprites("added")) {
-        const sheet = spritesheets[entity.sprite.spritesheet]
-        if (!sheet) continue
+      const added = querySprites.added()
+      for (const entity of querySprites.entities()) {
+        if (added.has(entity.__uuid)) {
+          const sheet = spritesheets[entity.sprite.spritesheet]
+          if (!sheet) continue
 
-        const name =
-          !entity.sprite.name && entity.sprite.frames.length > 0 ? entity.sprite.frames[0] : entity.sprite.name
-        const sprite = new Sprite(sheet.textures[name])
-        sprites.set(entity.__uuid, sprite)
+          const name =
+            !entity.sprite.name && entity.sprite.frames.length > 0 ? entity.sprite.frames[0] : entity.sprite.name
+          const sprite = new Sprite(sheet.textures[name])
+          sprites.set(entity.__uuid, sprite)
+          sprite.anchor.set(0.5)
 
-        sprite.x = entity.position.x
-        sprite.y = entity.position.y
-        sprite.anchor.set(0.5)
+          app.stage.addChild(sprite)
+        }
 
-        app.stage.addChild(sprite)
-      }
-
-      for (const entity of querySprites()) {
         const sprite = sprites.get(entity.__uuid)
         if (!sprite) continue
 

@@ -11,9 +11,11 @@ document.getElementById("app")?.appendChild(canvas)
 if (!ctx) throw new Error("")
 
 function randomHexColor() {
-  let val = '#'
+  let val = "#"
   for (let i = 0; i < 3; i++) {
-    val += Math.floor(Math.random() * 255).toString(16).padStart(2, "0")
+    val += Math.floor(Math.random() * 255)
+      .toString(16)
+      .padStart(2, "0")
   }
   return val
 }
@@ -45,13 +47,13 @@ world.addSystem("move", () => {
   return {
     name: "",
     update(dt) {
-      for (const entity of queryRect()) {
+      for (const entity of queryRect.entities()) {
         entity.rect.x += entity.move.dx * dt
         entity.rect.y += entity.move.dy * dt
         if (entity.rect.x < 0 || entity.rect.x > 1280 - entity.rect.w) entity.move.dx *= -1
         if (entity.rect.y < 0 || entity.rect.y > 720 - entity.rect.h) entity.move.dy *= -1
       }
-      for (const entity of queryDisc()) {
+      for (const entity of queryDisc.entities()) {
         entity.disc.x += entity.move.dx * dt
         entity.disc.y += entity.move.dy * dt
         if (entity.disc.x < 0 || entity.disc.x > 1280 - entity.disc.r) entity.move.dx *= -1
@@ -66,7 +68,7 @@ world.addSystem("render", () => {
   return {
     name: "",
     update() {
-      for (const entity of query()) {
+      for (const entity of query.entities()) {
         ctx.beginPath()
         ctx.fillStyle = getGradient(entity.rect.colors)
         ctx.fillRect(entity.rect.x, entity.rect.y, entity.rect.w, entity.rect.h)
@@ -81,7 +83,7 @@ world.addSystem("render", () => {
   return {
     name: "",
     update() {
-      for (const entity of query()) {
+      for (const entity of query.entities()) {
         ctx.beginPath()
         ctx.fillStyle = getGradient(entity.disc.colors)
         ctx.arc(entity.disc.x, entity.disc.y, entity.disc.r, 0, 2 * Math.PI)
