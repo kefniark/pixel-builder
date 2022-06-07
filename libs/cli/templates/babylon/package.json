@@ -52,7 +52,7 @@
       },
       "production": {
         "BABYLON_DEBUG_LAYER": false,
-        "APP_VERSION": "prod",
+        "APP_VERSION": "\"prod\"",
         "APP_DEBUG": true
       }
     }

@@ -1,4 +1,4 @@
-name: Pixel Builder - Test Project
+name: ⚙️ Pixel Builder - Test
 
 on: [push, pull_request]
 

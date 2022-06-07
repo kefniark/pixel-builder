@@ -29,6 +29,8 @@ On merge & pull request, Automatically run `yarn lint` and `yarn test`
 On merge, automatically build & deploy your project on github pages.
 This way you can share it with the rest of the world without dealing with any hosting services, it's free.
 
+To enable, go to `Settings` > `Pages` > `source = gh-pages`
+
 ---
 
 ## If I want a different behavior?
