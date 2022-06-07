@@ -12,12 +12,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true,
-    "baseUrl": "./",
-    "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@src/*": ["./src/*"]
-    }
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

@@ -6,7 +6,9 @@ One of the key feature of Pixel Builder is the asset build pipeline. It can dete
 
 This is a guarantee that the build stay small and not polluted with unused assets from early development stages.
 
-## Importing Asset as URL
+## Import Asset
+
+### Importing Asset as URL
 
 ```ts
 import imgUrl from "@assets/img.png"
@@ -14,23 +16,33 @@ import imgUrl from "@assets/img.png"
 document.getElementById("hero-img").src = imgUrl
 ```
 
-## Importing Asset in CSS
+### Importing Asset in CSS
 
 ```sass
 .background
     background: url('/assets/img.png')
 ```
 
-## Importing Asset in Vue
+### Importing Asset in Vue
 
 ```vue
-<img src="/assets/img.png">
+<img src="/assets/img.png" />
 ```
 
-## Importing Asset as String
+### Importing Asset as String
 
 Assets can be imported as strings using the `?raw` suffix.
 
 ```ts
 import shaderString from "@assets/shader.glsl?raw"
 ```
+
+## Asset Processing
+
+By default, Pixel Builder will try to optimize assets for you. But you can explicitely ask for some settings if you already know what you want.
+
+```vue
+<img src="/assets/logo.png?width=512" />
+```
+
+This will automatically resize the assets to fit in 512 pixel

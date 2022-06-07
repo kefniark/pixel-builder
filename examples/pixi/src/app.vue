@@ -1,21 +1,12 @@
 <template>
   <div class="layout">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
   </div>
 </template>
 
-<script lang="ts" setup>
-// disable any system right click
-document.addEventListener("contextmenu", (event) => event.preventDefault())
-</script>
-
 <style lang="sass">
-html, body
-  padding: 0
-  margin: 0
-  user-select: none
-  background: #111
-
 #app
   width: 100%
   min-height: 100vh
@@ -26,7 +17,9 @@ html, body
 .layout
   z-index: 1
   position: relative
-  overflow: hidden
+
+  // white border
+  box-shadow: inset 0px 0px 5px 1px #ffffff44
 
   // scaling
   width: 100vw

@@ -3,7 +3,7 @@ const { defaultTheme } = require('vuepress')
 module.exports = {
     lang: 'en-US',
     title: 'Pixel Builder',
-    description: 'Modern Framework to build HTML5 games',
+    description: 'Toolbox to build HTML5 games',
     base: '/pixel-builder/',
     theme: defaultTheme({
         darkMode: false,
@@ -48,6 +48,7 @@ module.exports = {
                     // { text: 'Audio', link: '/features/audio' },
                     { text: 'Github Action', link: '/features/github' },
                     { text: 'VSCode', link: '/features/vscode' },
+                    { text: 'ECS', link: '/features/ecs' }
                 ]
             }
         ]

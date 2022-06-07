@@ -1,49 +1,40 @@
 <template>
   <div class="page">
-    <div>{{ $t("message") }}</div>
-    <div>&nbsp;</div>
-    <div style="pointer-events: all">
-      <label>
-        <input
-          ref="input"
-          type="radio"
-          class="nes-radio"
-          v-model="checked"
-          value="main"
-          checked
-          @keyup.enter="submitHandler"
-        />
-        <span @click="submitHandler">Start !</span>
-      </label>
-
-      <label>
-        <input type="radio" class="nes-radio" v-model="checked" value="option" @keyup.enter="submitHandler" />
-        <span @click="submitHandler">Options</span>
-      </label>
-
-      <label>
-        <input type="radio" class="nes-radio" v-model="checked" value="exit" @keyup.enter="submitHandler" />
-        <span @click="submitHandler">Exit</span>
-      </label>
+    <!-- Put your logo there -->
+    <div>
+      <img src="/assets/logo.png" style="width: 40vw" />
     </div>
+
+    <!-- Make your own custom menu -->
+    <ul role="menu" aria-label="menu">
+      <li
+        role="menuitem"
+        tabindex="0"
+        @keyup.enter="() => submitHandler('/main')"
+        @click="() => submitHandler('/main')"
+      >
+        Start !
+      </li>
+      <li
+        role="menuitem"
+        tabindex="0"
+        @keyup.enter="() => submitHandler('/menu')"
+        @click="() => submitHandler('/menu')"
+      >
+        Options
+      </li>
+      <li role="menuitem" tabindex="0" @keyup.enter="() => submitHandler('/')" @click="() => submitHandler('/')">
+        Exit
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
-const checked = ref("main")
 
-// force focus on first element
-const input = ref<HTMLElement | null>(null)
-onMounted(() => input.value?.focus())
-
-// validate menu
 const router = useRouter()
-function submitHandler() {
-  console.log("submit", checked.value)
-  router.push({ path: checked.value })
-}
+const submitHandler = (route: string) => router.push({ path: route })
 </script>
 
 <style lang="sass" scoped>
@@ -52,9 +43,19 @@ function submitHandler() {
     height: 100%
     display: flex
     align-items: center
-    justify-content: space-between
+    justify-content: space-around
 
-label
-    display: block
-    font-size: 100%
+    ul
+        li
+            font-size: 3rem
+            line-height: 5rem
+            cursor: pointer
+            will-change: transform, color
+            transition: color 0.5s, transform 0.75s
+            transform: scale(1)
+            transform-origin: left
+
+            &:hover, &:focus
+                color: #bb26eb
+                transform: scale(1.25)
 </style>
