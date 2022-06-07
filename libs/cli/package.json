@@ -19,7 +19,9 @@
   "license": "ISC",
   "dependencies": {
     "@neutralinojs/neu": "^9.3.0",
+    "@pixel-builder/core": "*",
     "@rollup/pluginutils": "^4.2.1",
+    "@vitejs/plugin-vue": "^2.3.3",
     "adm-zip": "^0.5.9",
     "advzip-bin": "^2.0.0",
     "binpacking": "^0.0.1",
@@ -33,11 +35,9 @@
     "sharp": "^0.30.4",
     "shelljs": "^0.8.5",
     "vite-plugin-auto-zip": "^1.0.4",
-    "@vitejs/plugin-vue": "^2.3.3",
     "vite": "^2.9.9"
   },
   "devDependencies": {
-    "@pixel-builder/core": "*",
     "@types/adm-zip": "^0.5.0",
     "@types/crc": "^3.4.0",
     "@types/ejs": "^3.1.1",
