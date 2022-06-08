@@ -1,30 +1,36 @@
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "fs"
 import { assetTransform } from "./assets"
 import path from "path"
-import { build as builder, createServer, preview as previewer, BuildOptions } from "vite"
+import { build as builder, createServer, preview as previewer, BuildOptions, UserConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import AdmZip from "adm-zip"
 import { InputAction, InputType, Packer } from "roadroller"
-import { getPixelConfig } from "../helpers/config"
+import { getPixelConfig, PixelConfig } from "../helpers/config"
 const { execFile } = require("child_process")
 const advzip = require("advzip-bin")
 
 const plugins = [vue(), assetTransform()]
 
-function getBuildOptions(opt: Partial<BuildOptions> = {}) {
-  const buildOpt: BuildOptions = {
-    polyfillModulePreload: false,
-    minify: "terser",
+function getBuildOptions(config: PixelConfig): BuildOptions {
+  if (config.build.mode === "zip") {
+    return {
+      polyfillModulePreload: false,
+      minify: "terser",
+      outDir: path.resolve("build/web"),
+      emptyOutDir: true,
+      terserOptions: {
+        ecma: 2020,
+        module: true,
+        sourceMap: false,
+        toplevel: true,
+      },
+    }
+  }
+
+  return {
     outDir: path.resolve("build/web"),
     emptyOutDir: true,
-    terserOptions: {
-      ecma: 2020,
-      module: true,
-      sourceMap: false,
-      toplevel: true,
-    },
   }
-  return Object.assign({}, buildOpt, opt)
 }
 
 const optimize = async (buildFolder: string, compressedFolder: string, files: string[]) => {
@@ -100,7 +106,7 @@ export const build = async (options: { base: string }) => {
     publicDir: "../public",
     mode: "production",
     base: options.base ?? "./",
-    build: getBuildOptions(),
+    build: getBuildOptions(config),
     resolve: {
       alias: {
         "@assets": path.resolve(process.cwd(), "./src/assets/"),
@@ -120,13 +126,14 @@ export const build = async (options: { base: string }) => {
 
 export const preview = async () => {
   console.log("[Pixel Builder] Preview Command")
+  const config = getPixelConfig()
   if (!existsSync(".pixel")) mkdirSync(".pixel")
   if (!existsSync("build")) mkdirSync("build")
   const previewServer = await previewer({
     root: path.resolve("src"),
     plugins,
     publicDir: "../public",
-    build: getBuildOptions(),
+    build: getBuildOptions(config),
     preview: {
       port: 8080,
       open: true,
@@ -153,7 +160,7 @@ export const dev = async () => {
     define: def,
     publicDir: "../public",
     mode: "develop",
-    build: getBuildOptions(),
+    build: getBuildOptions(config),
     server: {
       port: 1337,
     },

@@ -23,5 +23,5 @@ yarn dev
 
 To see what a BabylonJS Template looks like:
 
-- [Code](https://github.com/kefniark/pixel-builder/tree/develop/examples/babylon)
-- [Preview](https://kefniark.github.io/pixel-builder/examples/babylon)
+- [Code](https://github.com/kefniark/pixel-builder-examples/tree/develop/projects/babylon)
+- [Preview](https://kefniark.github.io/pixel-builder-examples/babylon)

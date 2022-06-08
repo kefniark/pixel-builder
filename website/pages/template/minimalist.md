@@ -20,8 +20,8 @@ yarn dev
 
 To see what a Minimalist Template looks like:
 
-- [Code](https://github.com/kefniark/pixel-builder/tree/develop/examples/js13k)
-- [Preview](https://kefniark.github.io/pixel-builder/examples/js13k)
+- [Code](https://github.com/kefniark/pixel-builder-examples/tree/develop/projects/js13k)
+- [Preview](https://kefniark.github.io/pixel-builder-examples/js13k)
 
 ## Build Process
 

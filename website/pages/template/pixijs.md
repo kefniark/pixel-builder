@@ -23,5 +23,5 @@ yarn dev
 
 To see what a PixiJS Template looks like:
 
-- [Code](https://github.com/kefniark/pixel-builder/tree/develop/examples/pixi)
-- [Preview](https://kefniark.github.io/pixel-builder/examples/pixi)
+- [Code](https://github.com/kefniark/pixel-builder-examples/tree/develop/projects/pixi)
+- [Preview](https://kefniark.github.io/pixel-builder-examples/pixi)
