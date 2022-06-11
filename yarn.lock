@@ -83,16 +83,6 @@
     uuid "^8.3.2"
     websocket "^1.0.34"
 
-"@pixel-builder/core@*":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@pixel-builder/core/-/core-0.0.9.tgz#65eb288f5aa749b9c8a4ab23fd97354020f828aa"
-  integrity sha512-HCU4skm5+frewFEEw9C9Nk+cxi1y0X0Tfkplyctn7cWeRefQKxdreM4vIVdUbUS6FhZeX2L11Ayn+hnjvCD9IQ==
-  dependencies:
-    pinia "^2.0.14"
-    vue "^3.2.33"
-    vue-i18n "^9.1.10"
-    vue-router "^4.0.15"
-
 "@pixel-builder/engine@*":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@pixel-builder/engine/-/engine-0.0.1.tgz#6d20c8e75e055825f5e12a75e7ab4752c13ba6c1"

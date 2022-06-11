@@ -19,7 +19,6 @@
   "license": "ISC",
   "dependencies": {
     "@neutralinojs/neu": "^9.3.0",
-    "@pixel-builder/core": "*",
     "@rollup/pluginutils": "^4.2.1",
     "@vitejs/plugin-vue": "^2.3.3",
     "adm-zip": "^0.5.9",
