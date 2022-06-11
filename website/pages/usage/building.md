@@ -8,9 +8,9 @@ By default, a project is build for the web and you just have to run
 yarn build
 ```
 
-* Your build files will be available under `./build/web`
-* Your game is exported as a **SPA** (**S**ingle **P**age **A**pp)
-* A single `index.html` file, and only static asset files (no server or config required)
+- Your build files will be available under `./build/web`
+- Your game is exported as a **SPA** (**S**ingle **P**age **A**pp)
+- A single `index.html` file, and only static asset files (no server or config required)
 
 ## Base
 
