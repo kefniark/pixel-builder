@@ -1,0 +1,1 @@
+const e={key:"v-2fab03d2",path:"/usage/styling.html",title:"CSS Styling",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1654961987e3,contributors:[{name:"Kefniark",email:"kevin@destrem.net",commits:1}]},filePathRelative:"usage/styling.md"};export{e as data};
