@@ -25,7 +25,7 @@ export const InputSystem = (world: World<WorldContext, WorldComponents>): System
     if (evt.key === "ArrowDown") driver_break = 0
   }
 
-  const queryEntities = world.createQuery(["input"])
+  const query = world.createQuery(["input"])
   return {
     mounted() {
       document.addEventListener("keydown", pushKey)
@@ -36,7 +36,8 @@ export const InputSystem = (world: World<WorldContext, WorldComponents>): System
       document.removeEventListener("keyup", releaseKey)
     },
     update() {
-      for (const ent of queryEntities.entities()) {
+      const { entities } = query()
+      for (const ent of entities) {
         ent.input.throttle = driver_throttle
         ent.input.break = driver_break
         ent.input.turn = driver_turn
@@ -46,11 +47,12 @@ export const InputSystem = (world: World<WorldContext, WorldComponents>): System
 }
 
 export const MovementSystem = (world: World<WorldContext, WorldComponents>): System => {
-  const queryEntities = world.createQuery(["input", "position", "velocity"])
+  const query = world.createQuery(["input", "position", "velocity"])
 
   return {
     update(dt) {
-      for (const ent of queryEntities.entities()) {
+      const { entities } = query()
+      for (const ent of entities) {
         const forceTraction = ent.input.throttle * 50
         const forceBreak = ent.input.break * -50
         const forceDrag = ent.velocity.speed * Math.abs(ent.velocity.speed) * -0.005
@@ -76,14 +78,13 @@ export const MovementSystem = (world: World<WorldContext, WorldComponents>): Sys
 
 export const SpriteRendererSystem = (world: World<WorldContext, WorldComponents>): System => {
   const sprites = new Map<string, Sprite>()
-  const querySprites = world.createQuery(["position", "sprite"])
+  const query = world.createQuery(["position", "sprite"])
 
   return {
     update() {
       const { app, spritesheets } = world.context
-
-      const added = querySprites.added()
-      for (const entity of querySprites.entities()) {
+      const { added, entities, removed } = query()
+      for (const entity of entities) {
         if (added.has(entity.__uuid)) {
           const sheet = spritesheets[entity.sprite.spritesheet]
           if (!sheet) continue
@@ -109,6 +110,13 @@ export const SpriteRendererSystem = (world: World<WorldContext, WorldComponents>
         const idx = Math.round((entity.position.rotation / 2 / Math.PI) * 16) % 16
         const spriteName = entity.sprite.frames[idx]
         if (sprite.texture != sheet.textures[spriteName]) sprite.texture = sheet.textures[spriteName]
+      }
+
+      for (const entId of removed) {
+        const sprite = sprites.get(entId)
+        if (!sprite) continue
+        sprite.destroy()
+        sprites.delete(entId)
       }
     },
   }

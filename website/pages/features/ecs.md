@@ -55,10 +55,11 @@ world.createEntity(["position"], { position: { x: 5 } })
 ```ts
 // create different system to interact with those components
 world.addSystem("move", () => {
-  const queryEntities = world.createQuery(["position"])
+  const query = world.createQuery(["position"])
   return {
     update(dt: number) {
-      for (const entity of queryEntities()) {
+      const { entities } = query()
+      for (const entity of entities) {
         entity.position.x += dt
       }
     },
@@ -90,11 +91,12 @@ const world = createWorld<WorldContext, WorldComponents>({ app }, components)
 
 // then later in systems
 export const MovementSystem = (world: World<WorldContext, WorldComponents>): System => {
-  const queryEntities = world.createQuery(["input", "position"])
+  const query = world.createQuery(["input", "position"])
 
   return {
     update(dt) {
-      for (const ent of queryEntities()) {
+      const { entities } = query()
+      for (const ent of entities) {
         world.context.app // <= here you can access your object
       }
     },
@@ -105,26 +107,37 @@ export const MovementSystem = (world: World<WorldContext, WorldComponents>): Sys
 ### Component Added
 
 When a component is added or removed, it can be useful to run some specific code.
-For that, Query allow to filter entity `added` or `removed` in the same frame.
+For that, Queries allow to filter entity `added` or `removed`.
+
+- Those are `Set<string>` containing entity id
+- `added` and `removed` are per query (changed since last query call)
 
 ```ts
-const queryEntities = world.createQuery(["input", "position"])
+const query = world.createQuery(["input", "position"])
 
+const assets = new Map<string, ASSET>()
 return {
   update(dt) {
-    for (const ent of queryEntities("added")) {
-      // only new components
+    const { entities, added, removed } = query()
+    for (const ent of entities) {
+      // thats a new component do something
+      if (added.has(entity.__uuid)) {
+        assets.set(entity.__uuid, new ASSET())
+      }
+
+      // normal update code
+      const asset = assets.get(entity.__uuid)
+      if (!asset) continue
     }
 
-    for (const ent of queryEntities()) {
-      // all components
-    }
+    // do some cleanup there
+    for (const id of removed) {
+      const asset = assets.get(id)
+      if (!asset) continue
 
-    for (const ent of queryEntities("removed")) {
-      // only removed components
+      asset.destroy()
+      assets.delete(id)
     }
   },
 }
 ```
-
-P.S. `added` and `removed` are only available in the same update loop, so it depends on the system execution order.

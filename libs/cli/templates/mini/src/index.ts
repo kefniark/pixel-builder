@@ -47,13 +47,15 @@ world.addSystem("move", () => {
   return {
     name: "",
     update(dt) {
-      for (const entity of queryRect.entities()) {
+      const { entities: rects } = queryRect()
+      const { entities: discs } = queryDisc()
+      for (const entity of rects) {
         entity.rect.x += entity.move.dx * dt
         entity.rect.y += entity.move.dy * dt
         if (entity.rect.x < 0 || entity.rect.x > 1280 - entity.rect.w) entity.move.dx *= -1
         if (entity.rect.y < 0 || entity.rect.y > 720 - entity.rect.h) entity.move.dy *= -1
       }
-      for (const entity of queryDisc.entities()) {
+      for (const entity of discs) {
         entity.disc.x += entity.move.dx * dt
         entity.disc.y += entity.move.dy * dt
         if (entity.disc.x < 0 || entity.disc.x > 1280 - entity.disc.r) entity.move.dx *= -1
@@ -68,7 +70,8 @@ world.addSystem("render", () => {
   return {
     name: "",
     update() {
-      for (const entity of query.entities()) {
+      const { entities } = query()
+      for (const entity of entities) {
         ctx.beginPath()
         ctx.fillStyle = getGradient(entity.rect.colors)
         ctx.fillRect(entity.rect.x, entity.rect.y, entity.rect.w, entity.rect.h)
@@ -83,7 +86,8 @@ world.addSystem("render", () => {
   return {
     name: "",
     update() {
-      for (const entity of query.entities()) {
+      const { entities } = query()
+      for (const entity of entities) {
         ctx.beginPath()
         ctx.fillStyle = getGradient(entity.disc.colors)
         ctx.arc(entity.disc.x, entity.disc.y, entity.disc.r, 0, 2 * Math.PI)

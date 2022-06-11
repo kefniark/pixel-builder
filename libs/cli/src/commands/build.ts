@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "fs"
 import { assetTransform } from "./assets"
 import path from "path"
-import { build as builder, createServer, preview as previewer, BuildOptions, UserConfig } from "vite"
+import { build as builder, createServer, preview as previewer, BuildOptions } from "vite"
 import vue from "@vitejs/plugin-vue"
 import AdmZip from "adm-zip"
 import { InputAction, InputType, Packer } from "roadroller"
@@ -15,10 +15,20 @@ const plugins = [vue(), assetTransform()]
 function getBuildOptions(config: PixelConfig): BuildOptions {
   if (config.build.mode === "zip") {
     return {
+      target: "esnext",
       polyfillModulePreload: false,
+      cssCodeSplit: false,
+      sourcemap: false,
       minify: "terser",
       outDir: path.resolve("build/web"),
       emptyOutDir: true,
+      rollupOptions: {
+        output: {
+          format: "es",
+          interop: "esModule",
+          generatedCode: "es2015",
+        },
+      },
       terserOptions: {
         ecma: 2020,
         module: true,
@@ -52,7 +62,7 @@ const optimize = async (buildFolder: string, compressedFolder: string, files: st
   const { firstLine, secondLine } = packer.makeDecoder()
 
   let htmlContent = readFileSync(path.join(buildFolder, html[0]), "utf-8")
-  const searchJS = `<script type="module" crossorigin src="/${js[0]}"></script>`
+  const searchJS = `<script type="module" crossorigin src="${js[0]}"></script>`
   const matchScript = htmlContent.match(searchJS)
   if (matchScript) {
     const index = matchScript.index as number
@@ -62,7 +72,7 @@ ${secondLine}
   </script>${htmlContent.slice(index + searchJS.length)}`
   }
 
-  const searchCSS = `<link rel="stylesheet" href="/${css[0]}">`
+  const searchCSS = `<link rel="stylesheet" href="${css[0]}">`
   const matchStyle = htmlContent.match(searchCSS)
   if (matchStyle) {
     const index = matchStyle.index as number

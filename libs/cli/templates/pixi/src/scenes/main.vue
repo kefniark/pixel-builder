@@ -32,7 +32,7 @@ world.addSystem("input", InputSystem)
 world.addSystem("input", MovementSystem)
 world.addSystem("frame", SpriteRendererSystem)
 
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 150; i++) {
   world.createEntity(["input", "position", "velocity", "sprite"], {
     position: { x: Math.random() * 1000, y: Math.random() * 1000, rotation: Math.random() * Math.PI * 2 },
     sprite: {
@@ -56,13 +56,16 @@ setInterval(() => {
       ),
     },
   })
-}, 1000)
+}, 100)
 
-const q = world.createQuery(["position"])
+const query = world.createQuery(["position"])
 setInterval(() => {
-  console.log()
-  q.random(1).forEach((x) => world.removeEntity(x))
-}, 250)
+  const { entities } = query()
+  const first = entities.shift()
+  if (first) {
+    world.removeEntity(first)
+  }
+}, 1000)
 
 app.ticker.add((time) => {
   world.updateSystems(["input", "frame"], time * 16)
