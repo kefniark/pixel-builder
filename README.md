@@ -48,6 +48,5 @@ yarn dev
 
 ### Sub Projects 💥
 
-- [@pixel-builder/ecs](./libs/ecs/README.md): ECS for Pixel Builder
+- [@pixel-builder/ecs](./libs/ecs/README.md): Entity Component System for Pixel Builder
 - [@pixel-builder/cli](./libs/cli/): CLI tool to create, build your Pixel Project
-- [@pixel-builder/core](./libs/core/): Helpers to make project bootstrap easier
