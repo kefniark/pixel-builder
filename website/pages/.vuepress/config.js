@@ -12,6 +12,10 @@ module.exports = {
         repo: 'https://github.com/kefniark/pixel-builder',
         sidebar: [
             {
+                text: 'What is Pixel Builder ?',
+                link: '/presentation',
+            },
+            {
                 text: 'Getting Started',
                 link: '/getting-started',
             },
