@@ -58,13 +58,16 @@ export function assetTransform() {
   }
 
   const assetsToCopy: Map<string, { src: string; cache: string; id: string }> = new Map()
+  let viteBase = ""
 
   return {
     name: "resource-prepare",
     enforce: "pre",
-    configResolved(cfg) {},
+    configResolved(cfg) {
+      viteBase = cfg.base
+    },
     async generateBundle({ file, dir }) {
-      console.log("generateBundle", file, dir, assetsToCopy)
+      // console.log("generateBundle", file, dir, assetsToCopy)
       const outputDir = path.join(dir, resourceFolder)
       if (!existsSync(outputDir)) mkdirSync(outputDir)
       for (const asset of assetsToCopy.values()) {
@@ -75,14 +78,17 @@ export function assetTransform() {
         }
       }
     },
-    async resolveId(id, importer) {
-      if (!filter(id)) return null
+    async resolveId(identifier, importer) {
+      if (!filter(identifier)) return null
+      const start = identifier.indexOf("{")
+      const end = identifier.indexOf("}")
+      const id = start !== -1 && end !== -1 ? identifier.slice(0, start - 1) + identifier.slice(end + 1) : identifier
       if (id.startsWith(`/${resourceFolder}`)) return
       if (path.isAbsolute(id)) return
 
       const srcURL = parseURL(id)
       const newid = generateAssetId(path.join("./src", id), srcURL, options)
-      console.log("resolve id", id, importer, `/${resourceFolder}/${newid}.webp`)
+      // console.log("resolve id", id, importer, `/${resourceFolder}/${newid}.webp`)
       return url(`/${resourceFolder}/${newid}.webp`)
     },
     async load(id) {
@@ -98,7 +104,7 @@ export function assetTransform() {
         id: newid,
       })
 
-      return buildExportCode(path.join(`/${resourceFolder}/${newid}.webp`))
+      return buildExportCode(path.join(`${viteBase}${resourceFolder}/${newid}.webp`))
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {

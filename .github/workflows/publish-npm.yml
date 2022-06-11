@@ -8,7 +8,6 @@ on:
         description: Which package ?
         options: 
           - ecs
-          - core
           - cli
       version:
         type: string

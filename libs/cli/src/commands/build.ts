@@ -6,6 +6,7 @@ import vue from "@vitejs/plugin-vue"
 import AdmZip from "adm-zip"
 import { InputAction, InputType, Packer } from "roadroller"
 import { getPixelConfig, PixelConfig } from "../helpers/config"
+import { info } from "../helpers/colors"
 const { execFile } = require("child_process")
 const advzip = require("advzip-bin")
 
@@ -30,6 +31,7 @@ function getBuildOptions(config: PixelConfig): BuildOptions {
   return {
     outDir: path.resolve("build/web"),
     emptyOutDir: true,
+    minify: false,
   }
 }
 
@@ -93,19 +95,20 @@ ${secondLine}
 }
 
 export const build = async (options: { base: string }) => {
-  console.log("[Pixel Builder] Build Command", options)
+  console.log(info("[Pixel Builder] Build Command"))
   const config = getPixelConfig()
   const def = config.define["production"] ?? {}
   if (!existsSync(".pixel")) mkdirSync(".pixel")
   if (!existsSync("build")) mkdirSync("build")
   if (!existsSync("build/web")) mkdirSync("build/web")
-  const output = (await builder({
+
+  const buildOptions = {
     root: path.resolve("src"),
     plugins,
     define: def,
     publicDir: "../public",
     mode: "production",
-    base: options.base ?? "./",
+    base: options.base ?? "",
     build: getBuildOptions(config),
     resolve: {
       alias: {
@@ -113,7 +116,9 @@ export const build = async (options: { base: string }) => {
         "@src": path.resolve(process.cwd(), "./src/"),
       },
     },
-  })) as { output: { fileName: string }[] }
+  }
+  // console.log('Build', buildOptions)
+  const output = (await builder(buildOptions)) as { output: { fileName: string }[] }
 
   if (config.build.mode === "zip") {
     if (!existsSync("build/compressed")) mkdirSync("build/compressed")
@@ -125,7 +130,7 @@ export const build = async (options: { base: string }) => {
 }
 
 export const preview = async () => {
-  console.log("[Pixel Builder] Preview Command")
+  console.log(info("[Pixel Builder] Preview Command"))
   const config = getPixelConfig()
   if (!existsSync(".pixel")) mkdirSync(".pixel")
   if (!existsSync("build")) mkdirSync("build")
@@ -150,7 +155,7 @@ export const preview = async () => {
 }
 
 export const dev = async () => {
-  console.log("[Pixel Builder] Dev Command")
+  console.log(info("[Pixel Builder] Dev Command"))
   const config = getPixelConfig()
   const def = config.define["develop"] ?? {}
   const server = await createServer({

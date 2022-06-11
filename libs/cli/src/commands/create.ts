@@ -3,6 +3,7 @@ import path from "path"
 import shell from "shelljs"
 import * as ejs from "ejs"
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync, copyFileSync } from "fs"
+import { info, log, warning } from "../helpers/colors"
 
 interface CreateOptions {
   root: string
@@ -19,10 +20,11 @@ interface CreateOptions {
 // create folder
 function createProject(projectPath: string) {
   if (existsSync(projectPath)) {
-    console.log(`Folder ${projectPath} exists. Delete or use another name.`)
+    console.log(warning(`Folder ${projectPath} exists. Delete or use another name.`))
     return false
   }
-  console.log(" > Creating Folder")
+
+  console.log(log(" > Creating Folder"))
   mkdirSync(projectPath)
   return true
 }
@@ -83,9 +85,9 @@ function postProcess(options: CreateOptions) {
 export default async (name: string, args: { template: string; features: string }) => {
   const root = path.resolve(".").replace(/\\/g, "/")
   const targetPath = path.join(root, name).replace(/\\/g, "/")
-  if (existsSync(targetPath)) return console.log(`Folder ${targetPath} exists. Delete or use another name.`)
+  if (existsSync(targetPath)) return console.log(warning(`Folder ${targetPath} exists. Delete or use another name.`))
 
-  console.log(args)
+  // console.log(args)
   const answers = await inquirer.prompt([
     {
       type: "list",
@@ -175,6 +177,12 @@ export default async (name: string, args: { template: string; features: string }
   const features = args.features ? args.features.split(",") : answers.features
 
   const templatePath = getTemplate("templates", renderer)
+
+  console.log(info.bold(`Create a new Pixel Project '${name}'`))
+  console.log(
+    info(`    Template: ${renderer}
+    Path: ${targetPath})`)
+  )
   if (!createProject(targetPath)) return
   const options: CreateOptions = {
     root,
@@ -188,43 +196,47 @@ export default async (name: string, args: { template: string; features: string }
     useVSCode: features.includes("vscode"),
   }
 
-  console.log(" > Copying Files")
+  console.log(log(" > Copying Files"))
   createDirectoryContents(templatePath, name, options)
 
-  console.log(answers)
+  // console.log(answers)
   if (options.useGit) {
-    console.log(" > Adding Git")
+    console.log(log(" > Adding Git"))
     createDirectoryContents(getTemplate("templates/features", "git"), name, options)
   }
 
   if (options.useVSCode) {
-    console.log(" > Adding VSCode")
+    console.log(log(" > Adding VSCode"))
     createDirectoryContents(getTemplate("templates/features", "vscode"), name, options)
   }
 
   if (options.useLint) {
-    console.log(" > Adding Lint")
+    console.log(log(" > Adding Lint"))
     createDirectoryContents(getTemplate("templates/features", "lint"), name, options)
   }
 
   if (options.useTest) {
-    console.log(" > Adding Test")
+    console.log(log(" > Adding Test"))
     createDirectoryContents(getTemplate("templates/features", "test"), name, options)
   }
 
   if (options.useGithub) {
-    console.log(" > Adding Github Actions")
+    console.log(log(" > Adding Github Actions"))
     createDirectoryContents(getTemplate("templates/features", "github"), name, options)
   }
 
-  console.log(" > Installing Dependencies")
+  console.log(log(" > Installing Dependencies"))
   postProcess(options)
 
-  console.log("------")
-  console.log(`Your "${options.projectName}" project is ready to use !`)
-  console.log("Run the following:")
-  console.log(` cd ${name}`)
-  console.log(` yarn dev`)
-  console.log(`And check README.md for more informations`)
-  console.log("------")
+  console.log(info(`------`))
+  console.log(info.bold(`Your "${options.projectName}" project is Ready !`))
+  console.log(
+    info(`
+To get started, Run the following command:
+  cd ${name}
+  yarn dev
+And check README.md for more informations
+------
+`)
+  )
 }

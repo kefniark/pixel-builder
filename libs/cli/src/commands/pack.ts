@@ -5,6 +5,7 @@ import { GrowingPacker } from "binpacking"
 import { glob } from "glob"
 import { assetPath, getPixelConfig, pixelDefaultAsset, toNumber } from "../helpers/config"
 import merge from "deepmerge"
+import { info } from "../helpers/colors"
 
 interface SpritesheetConfig {
   padding: number
@@ -224,17 +225,19 @@ const toSpritesheet = async (input: string[], output: string, cfg: SpritesheetCo
 
   writeFileSync(manifest, JSON.stringify(manifestData, null, 2))
 
-  console.log(`Spritesheet : "${path.relative(".", output)}" Generated !`)
-  console.log(`  - ${blocks.length} images`)
-  console.log(`  - resolution ${packer.root.w}x${packer.root.h}`)
-  console.log(cfg)
+  console.log(
+    info(`Spritesheet : "${path.relative(".", output)}" Generated !
+- ${blocks.length} images
+- resolution ${packer.root.w}x${packer.root.h}
+`)
+  )
 }
 
 export default async (files: string, options: PackOptions) => {
   let output = options.output || "spritesheet.png"
   const padding = options.padding !== undefined ? parseInt(options.padding ?? "2") : 2
   const tile = options.tile !== undefined ? parseInt(options.tile ?? "0") : 0
-  console.log(options)
+  // console.log(options)
 
   // get from commands
   if (files) {
@@ -255,11 +258,11 @@ export default async (files: string, options: PackOptions) => {
   for (const asset of assets) {
     const assetEntry = merge(pixelDefaultAsset, asset)
 
-    console.log(
-      config.project.assets_folder,
-      assetEntry.files,
-      path.join(config.project.assets_folder, assetEntry.files)
-    )
+    // console.log(
+    //   config.project.assets_folder,
+    //   assetEntry.files,
+    //   path.join(config.project.assets_folder, assetEntry.files)
+    // )
 
     const images = glob.sync(assetPath(config, assetEntry.files))
     if (images.length === 0) {

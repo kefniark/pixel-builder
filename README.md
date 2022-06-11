@@ -1,5 +1,9 @@
 # Pixel Builder 🚀
 
+![npm](https://img.shields.io/npm/dw/@pixel-builder/cli)
+[![⚙️ CLI Tests](https://github.com/kefniark/pixel-builder/actions/workflows/pr-cli.yml/badge.svg)](https://github.com/kefniark/pixel-builder/actions/workflows/pr-cli.yml)
+[![⚙️ ECS Tests](https://github.com/kefniark/pixel-builder/actions/workflows/pr-ecs.yml/badge.svg)](https://github.com/kefniark/pixel-builder/actions/workflows/pr-ecs.yml)
+
 > Still under development
 
 ![](./pixel-builder-banner.gif)
