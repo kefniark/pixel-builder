@@ -5,6 +5,9 @@ home: true
 heroText: " "
 heroImage: https://raw.githubusercontent.com/kefniark/pixel-builder/develop/pixel-builder-banner.gif
 actions:
+  - text: What is Pixel Builder ?
+    link: /presentation
+    type: secondary
   - text: Get Started
     link: /getting-started
     type: primary

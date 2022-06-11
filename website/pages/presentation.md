@@ -16,7 +16,7 @@ Let's see each point individually
 
 ## 🚀 Project Boostrap
 
-This part is usually really time consuming when working on web projects.
+Starting a new project is usually really time consuming when working on web projects.
 
 - Lot of possible Libraries
 - Lot of configurations and incompatibilities
@@ -24,7 +24,7 @@ This part is usually really time consuming when working on web projects.
 
 **Pixel Builder** comes with a set of questions and pre-configure the project for your needs.
 
-You can start working on your game in minutes without having to worry about the setup or configuration files.
+You can start working on your game in minutes without having to worry about the setup or configuration files. We figure things out, so you don't have to.
 
 Every choice is transparent and easy to change, from there feel free to add libraries or features.
 
@@ -37,6 +37,8 @@ Out of the box, **Pixel Builder** comes with expected modern development feature
 - Development server
 - HMR (Auto Reload)
 - Pre-compilers (Typescript, Sass, ...)
+
+One command `yarn dev` and you can work on your game
 
 Under the hood it use [Vite](https://vitejs.dev/) known for his speed
 
@@ -57,11 +59,11 @@ Our goal is to provide you tools to simplify your life.
 
 No crazy dependencies or GUI app to manually install, just use our asset manifest to explicit your needs and we get you covered.
 
----
-
 ## 📦 Build
 
 Finally and maybe the most important one, the build pipeline.
+
+Anyone who already spend hours fighting with webpack, gulp or babel will be please to know they have nothing to do. One command `yarn build` and you are ready to publish your game
 
 ### 1. Optimized by default
 
@@ -73,7 +75,7 @@ Web Games have to be performant and load fast, which require both code and asset
 
 ### 2. Easy to Share
 
-Web games can be annoying to deploy and share sometime. To help you with that , we provide few options:
+Web games can be annoying to share sometime, to help with that we provide you few options:
 
 - We build as **Single Page App** by default : Static files that can be host anywhere (ftp, github, ...)
 - We can build desktop app with [NeutralinoJS](https://github.com/neutralinojs/neutralinojs) (Windows, Linux, Mac): Easy to share for Game Jams or [itch.io](https://itch.io/)
